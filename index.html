@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+</head>
+
+<body>
+    <header></header>
+    <h1>Psychic Game</h1>
+    <h3>Guess what letter I am thinking of?</h3>
+    </header>
+    <main>
+        <p>Wins: <span id="wins"></span></p>
+        <p>Losses: <span id="losses"></span></p>
+        <p>GuessesLeft: <span id="guessesLeft"></span></p>
+        <p>Your Guesses So Far: <span id="yourGuessesSoFar"></span></p>
+    </main>
+
+    <script type="text/javascript">
+        const appchoices = "abcdefghijklmnopqrstuvwxyz".split("");
+        let appGuess = appchoices[Math.floor(Math.random() * appchoices.length)];
+
+        console.log(appGuess);
+
+        let wins = 0;
+        let losses = 0;
+        let guessesLeft = 9;
+        let yourGuessesSoFar = [];
+
+        let winsValue = document.getElementById("wins");
+        let lossesValue = document.getElementById("losses");
+        let guessesLeftValue = document.getElementById("guessesLeft");
+        let yourGuessesSoFarValue = document.getElementById("yourGuessesSoFar");
+
+        winsValue.textContent = wins;
+        guessesLeftValue.textContent = guessesLeft;
+        lossesValue.textContent = losses;
+
+        for (let i = 1; i < 10; i++) {
+            document.onkeyup = function (event) {
+                let yourChoice = event.key;
+                yourGuessesSoFar.push(yourChoice);
+                if (yourGuessesSoFar.length === 1) guessesLeft--;
+
+                if ((yourGuessesSoFar).includes(appGuess)) {
+                    wins++;
+                    restartGame();
+                    updateValues(wins, losses);
+                } else {
+                    if (guessesLeft > 0) {
+                        guessesLeftValue.textContent = guessesLeft--;
+                        yourGuessesSoFarValue.textContent = yourGuessesSoFar.join(",");
+                    } else if (guessesLeft === 0) {
+                        losses++;
+                        restartGame();
+                        updateValues(wins, losses);
+                    }
+                }
+            }
+        }
+
+
+
+
+        function restartGame() {
+            guessesLeft = 9;
+            guessesLeftValue.textContent = 9;
+            yourGuessesSoFar = [];
+            yourGuessesSoFarValue.textContent = '';
+            appGuess = appchoices[Math.floor(Math.random() * appchoices.length)];
+           
+            console.log(appGuess + '2');
+        }
+
+
+        function updateValues(wins, losses) {
+            winsValue.textContent = wins;
+            lossesValue.textContent = losses;
+        }
+
+    </script>
+
+</body>
+
+</html>
