@@ -40,7 +40,7 @@
         guessesLeftValue.textContent = guessesLeft;
         lossesValue.textContent = losses;
 
-        for (let i = 1; i < 10; i++) {
+        for (let i = 1; i < guessesLeft+1; i++) {
             document.onkeyup = function (event) {
                 let yourChoice = event.key;
                 yourGuessesSoFar.push(yourChoice);
