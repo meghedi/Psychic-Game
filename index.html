@@ -40,10 +40,14 @@
         guessesLeftValue.textContent = guessesLeft;
         lossesValue.textContent = losses;
 
-        for (let i = 1; i < guessesLeft+1; i++) {
+        for (let i = 1; i < guessesLeft + 1; i++) {
             document.onkeyup = function (event) {
                 let yourChoice = event.key;
-                yourGuessesSoFar.push(yourChoice);
+                if (event.keyCode >= 65 && event.keyCode <= 90 && !(yourGuessesSoFar).includes(yourChoice)) {
+                    yourGuessesSoFar.push(yourChoice);
+                } else {
+                    alert("Please guess a new letter!");
+                }
                 if (yourGuessesSoFar.length === 1) guessesLeft--;
 
                 if ((yourGuessesSoFar).includes(appGuess)) {
@@ -69,7 +73,7 @@
             yourGuessesSoFar = [];
             yourGuessesSoFarValue.textContent = '';
             appGuess = appchoices[Math.floor(Math.random() * appchoices.length)];
-           
+
             console.log(appGuess + '2');
         }
 
